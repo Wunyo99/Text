@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: hsl(148, 38%, 91%);
+            min-height:100vh;
+            font-family: 'Karla', sans-serif;
+            display: grid;
+            place-content: center;
+        }
+        
+        label{
+            color: var(dark grey);
+        }
+        input[type='text'],
+        input[type='email'],
+        textarea{
+            width: 100%;
+            padding: .5rem;
+            margin-top: .5rem;
+            font-family: inherit;
+            border: 1px solid  grey;
+            border-radius: .35rem;
+        }
+        input:focus,
+        textarea:focus{
+            outline: 1px solid var(green);
+            border: 1px solid var(green);
+        }
+        input[type='text'].form-error,
+        input[type='email'].form-error{
+            border: 1px solid var(red);
+        }
+        .required-input{
+            color: green;
+        }
+        .form-alert{
+            display: none;
+            color: red;
+            margin-top: .5rem;
+        }
+        .form-alert.form-error{
+            display: block;
+        }
+        .contact-form{
+            background-color: white;
+            margin: 1rem;
+            padding: 2rem;
+            border-radius: 1rem;
+        }
+        .contact-form h1{
+            color:dark;
+            margin-bottom: 1.25rem;
+        }
+        .contact-form .form-item{
+            margin-bottom: 1.5rem ;
+        }
+       .contact-form .form-item:nth-child(1){
+        display:flex;
+        gap: 1rem;
+       }
+       
+       .contact-form .form-item:nth-child(3) .radio-inputs{
+        margin-top: .5rem;
+        display: flex;
+        gap: 1rem;
+       }
+       .contact-form .form-item:nth-child(3) .radio-inputs .radio-option{
+        cursor: pointer;
+        width: 100%;
+        padding: .5rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        outline: 1px solid hsl(169, 82% , 27%);
+        border-radius: .35rem;
+       }
+       .contact-form .form-item:nth-child(3) .radio-inputs .radio-option.active{
+        background-color: lightgreen;
+       }
+       .contact-form .form-item:nth-child(3) input[type="radio"] {
+        appearance: none;
+        width: .5rem;
+        height: .5rem;
+        outline: 2px solid  hsl(169, 82% , 27%);
+        outline-offset: 3px;
+        border-radius: 50%;
+       }
+       .contact-form .form-item:nth-child(3) input[type="radio"]:checked{
+        background-color:  hsl(169, 82% , 27%);
+
+       }
+       .contact-form .form-item:nth-child(3) .radio-inputs .radio-option label{
+        cursor: pointer;
+        width: 100%;
+       }
+       .contact-form.form-item:nth-child(5){
+        margin-top: 2rem;
+       }
+       .contact-form.form-item:nth-child(5) div{
+        display: flex;
+        gap: 1rem;
+       }
+       .contact-form .form-item:nth-child(5) input[type="checkbox"]{
+        cursor: pointer;
+        accent-color:hsl(169, 82% , 27%);
+       }
+       .contact-form .form-item:nth-child(5) label{
+        cursor: pointer;
+       }
+
+
+        #submit{
+                cursor: pointer;
+                background-color:  hsl(169, 82% , 27%);
+                color:white; 
+                width: 100%;
+                padding: .75rem;
+                 border-radius: 5px;
+                border: none;
+                } 
+        #submit:hover{
+            background-color: grey;
+        }  
+
+     
+input:not([type="checkbox"]):not([type="radio"]):hover,textarea:hover{
+    border: 1px solid hsl(169, 82% , 27%);
+}
+.success-message{
+    background-color: darkgrey;
+    color:  green;
+    width: max-content;
+    padding: 1rem;
+    pointer-events: none;
+    opacity: 0;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(50%);
+    border-radius: .35rem;
+}
+.success-message.active{
+    display: block;
+    pointer-events: all;
+    animation-name: fadeOut;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+}
+@keyframes fadeOut{
+    0%, 25%, 50%, 75%{
+        opacity: 1;    
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.success-message .success-header{
+    color: white;
+    margin-bottom: .5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+      @media (max-width:30px){
+        .contact-form .form-item:nth-child(1){
+            flex-direction: column;
+        }
+       
+      .contact-form .form-item:nth-child(3) .radio-inputs{
+        flex-direction: column;
+      }
+      .textarea{
+        height: 200px;
+      }
+      .success-message{
+        width: 35ch;
+        top: 5%;
+      }
+    }
+
+
+        
+        
+    </style>
+        <div class="contact-form">
+            <h1>
+                Contact Us
+            </h1>
+            
+         <form id="contact-form">
+                <div class="form-item">
+                    <div class="first-name">
+                        <label for="name">First Name <span class="required-input">*</span></label>
+                        <input type="text">
+                        <p class="form-alert">This field is required</p>
+                    </div>
+
+                    <div class="last-name">
+                        <label for="name">Last Name<span class="required-input">*</span></label>
+                        <input type="text">
+                        <p class="form-alert">This field is required</p>
+                    </div>
+            </div>
+            <div class="form-item">
+                    <label for="name">Email Address<span class="required-input">*</span></label>
+                    <input type="email">
+                    <p class="form-alert">Please enter a valid email address</p>
+            </div>
+
+            <div class="form-item">
+                    <label for="query"> Query Type<span class="required-input">*</span></label>
+
+                <div class="radio-inputs"> 
+                    <div class="radio-option">
+                        <input type="radio" id="general-enquiry" name="query-type" value="General-Enquiry">
+                        <label for="general-enquiry">General Enquiry</label>
+                    </div>
+
+                    <div class="radio-option">
+                        <input type="radio" id="support request" name="query-type" value="General-Enquiry">
+                        <label for="support request">Support Request</label>
+                    </div>
+                </div>
+                <p class="form-alert"> Please select a query type</p>
+            </div>
+
+                <div class="form-item" >
+                    <label for="message">Message<span class="required-input">*</span></label>
+                    <textarea name="message" id=""></textarea>
+                    <p class="form-alert">This field is required</p>
+                </div>
+                <div class="form-item">
+                    <div>
+                        <input type="checkbox">
+                        <label for="consent">I consent to being contacted by the team<span class="required-input">*</span></span></label>
+                    </div>
+                    <p class="form-alert">To submit this form, please consent to being contacted</p>
+                </div>
+                
+                <button id="submit"> Submit</button>
+                </div>
+            </form>
+        </div>
+        <div id="success-message" class="success-message">
+            <div class="message-header">
+                <img src="./images/icon-success-check.svg" alt="">
+                Message Sent!
+            </div>
+            <p>Thanks for completing the forms. We'll be in touch soon!</p>
+        </div>
+            
+    
+        
+</body>
+</html>
